@@ -22,21 +22,13 @@ shinyServer(function(input, output) {
     # used the slider and input a min of 50 and a max of 55, this will create a vector of data that will look 
     # like 50,51,52,53,54,55
     horsepower_seq <- seq(from = input$hp[1], to = input$hp[2], by = 1)
-    
-    
-    
-    # This will create a sequence of values to be used in the filter function below. For example, if a user
-    # used the slider and input a min of 70 and a max of 71, this will create a vector of data that will look 
-    # like 70.1,70.2,70.3,70.4,70.5,70.6, all the way to 71
-    displacement_seq <- seq(from = input$disp[1], to = input$disp[2], by = 0.1)
-    
-    
+  
     car_data <- transmute(mtcars, Car = rownames(mtcars), MilesPerGallon = mpg, 
                       GasCost = input$dist/mpg*input$gas_cost,
-                      Cylinders = cyl, Displacement = disp, Horsepower = hp, 
+                      Cylinders = cyl, Horsepower = hp, 
                       Transmission = am)
     car_data <- filter(car_data, GasCost <= input$max_gas_cost, Cylinders %in% input$cyl, 
-                   Displacement %in% displacement_seq, Horsepower %in% horsepower_seq, Transmission %in% input$am)
+                    Horsepower %in% horsepower_seq, Transmission %in% input$am)
     car_data <- mutate(car_data, Transmission = ifelse(Transmission==0, "Automatic", "Manual"))
     car_data <- arrange(car_data, GasCost)
     car_data

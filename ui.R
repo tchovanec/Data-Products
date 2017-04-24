@@ -35,11 +35,7 @@ shinyUI(navbarPage("Car Selection For Your Vacation Trip",
                                 checkboxGroupInput('cyl', 'Number of cylinders:', c("Four"=4, "Six"=6, "Eight"=8), selected = c(4,6,8)),
                                 
                                 # Creates a slider input that allows for a minumum of 50 and a max of 340 horsepower
-                                sliderInput('hp', 'Horsepower', min=50, max=340, value=c(50,340), step=10),
-                                
-                                # Creates a slider input that allows for a minimum displacement of 70 and max of 480. It increments by 10
-                                sliderInput('disp', 'Displacement', min=70, max=480, value=c(70,480), step=10)
-                                
+                                sliderInput('hp', 'Horsepower', min=50, max=340, value=c(50,340), step=10)
                                 
                               ),
                               
